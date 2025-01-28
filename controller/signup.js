@@ -4,7 +4,23 @@ const LocalDb = require('../config/database');
 
 const InsertUserData = (req, res) => {
 
-    const { emlId, pass, fName, lName, role, stat } = req.body;
+    console.log("InsertUserData(+)");
+
+    SignupSchema.SignupResp.status = "S";
+
+    const { emlId, pass, fName, lName, dob, role } = req.body;
+
+    AssignData(emlId, pass, fName, lName, dob, role);
+
+    SignupSchema.SignupResp.message = "User Data Inserted Successfully";
+
+    res.send(SignupSchema.SignupResp);
+
+    console.log("InsertUserData(-)");
+};
+
+
+function AssignData(emlId, pass, fName, lName, dob, role){
 
     const UserData = SignupSchema.UserDetails();
 
@@ -12,8 +28,8 @@ const InsertUserData = (req, res) => {
     UserData.password = pass;
     UserData.firstName = fName;
     UserData.lastName = lName;
+    UserData.dob = dob;
     UserData.role = role;
-    UserData.status = stat;
     UserData.createdBy = emlId;
     UserData.createdDate = new Date();
     UserData.updatedBy = emlId;
@@ -21,10 +37,6 @@ const InsertUserData = (req, res) => {
 
     LocalDb.UserData.push(UserData);
 
-    console.log("Data", LocalDb.UserData);
-    
-
-    res.send("Data Inserted Successfully");
 };
 
 module.exports = { InsertUserData };

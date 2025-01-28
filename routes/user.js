@@ -6,6 +6,6 @@ const LoginApi = require('../controller/login')
 
 router.post('/signup', InsertUserApi.InsertUserData);
 router.get('/getuser', GetUserApi.GetUser);
-router.get('/login', LoginApi.Login)
+router.post('/login', LoginApi.Login)
 
 module.exports = router;

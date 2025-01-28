@@ -3,12 +3,18 @@ const UserDetails = () => ({
     password: "",
     firstName: "",
     lastName: "",
+    dob:"",
     role: "",
-    status: "",
+    status: "Y",
     createdBy: "",
     createdDate: new Date,
     updatedBy: "",
     updatedDate: new Date
 });
 
-module.exports = {UserDetails};
+SignupResp =  {
+    status: "",
+    message: "",
+}
+
+module.exports = {UserDetails,SignupResp};
