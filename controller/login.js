@@ -1,13 +1,23 @@
+const LoginSchema = require('../model/login');
+
 const LocalDb = require('../config/database');
 
 const Login = (req, res) => {
+
+    console.log("Login(+)");
+
+    LoginSchema.LoginResp.status = "S";
     const { emlId, pass } = req.body;
     const UserData = LocalDb.UserData.find((user) => user.emailId === emlId && user.password === pass);
     if (UserData) {
-        res.send("Login Success");
+        LoginSchema.LoginResp.message = "Login Success";
     } else {
-        res.send("Login Failed");
+        LoginSchema.LoginResp.status = "E";
+        LoginSchema.LoginResp.message = "Login Failed";
     }
-} 
+    res.send(LoginSchema.LoginResp);
+
+    console.log("Login(-)");
+}
 
 module.exports = { Login };
